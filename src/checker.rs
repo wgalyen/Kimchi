@@ -6,21 +6,17 @@ use reqwest::header::{self, HeaderValue};
 use serde_json::Value;
 use url::Url;
 
-extern crate dotenv;
-
-use dotenv::dotenv;
-use std::env;
-
 /// A link checker using an API token for Github links
 /// otherwise a normal HTTP client.
 pub(crate) struct Checker {
     reqwest_client: reqwest::blocking::Client,
     gh_client: Github,
+    verbose: bool,
 }
 
 impl Checker {
     /// Creates a new link checker
-    pub fn try_new(token: String) -> Result<Self> {
+    pub fn try_new(token: String, verbose: bool) -> Result<Self> {
         let mut headers = header::HeaderMap::new();
         // Faking the user agent is necessary for some websites, unfortunately.
         // Otherwise we get a 403 from the firewall (e.g. Sucuri/Cloudproxy on ldra.com).
@@ -36,6 +32,7 @@ impl Checker {
         Ok(Checker {
             reqwest_client,
             gh_client,
+            verbose,
         })
     }
 
@@ -78,7 +75,7 @@ impl Checker {
         Ok((owner.as_str().into(), repo.as_str().into()))
     }
 
-    pub fn check(&self, url: &Url) -> bool {
+    pub fn check_real(&self, url: &Url) -> bool {
         if self.check_normal(&url) {
             return true;
         }
@@ -89,12 +86,30 @@ impl Checker {
         }
         false
     }
+
+    pub fn check(&self, url: &Url) -> bool {
+        let ret = self.check_real(&url);
+        match ret {
+            true => {
+                if self.verbose {
+                    println!("✅{}", &url);
+                }
+            }
+            false => {
+                println!("❌{}", &url);
+            }
+        };
+        ret
+    }
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
     use url::Url;
+    extern crate dotenv;
+
+    use std::env;
 
     #[test]
     fn test_is_github() {
