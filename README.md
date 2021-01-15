@@ -8,11 +8,12 @@
 The existing link checkers were not flexible enough for my use-case.
 kimchi can...
 
-* Handle chunked encodings
-* Handle gzip
-* Fake user agents (required for some firewalls)
-* Skip non-links like anchors or relative URLs
-* SOON: Ignore SSL certificate errors
+- Handle chunked encodings
+- Handle gzip
+- Fake user agents (required for some firewalls)
+- Skip non-links like anchors or relative URLs
+- SOON: Ignore SSL certificate errors
+- SOON: fully async code execution
 
 ## How?
 
