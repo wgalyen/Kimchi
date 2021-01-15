@@ -727,6 +727,7 @@ dependencies = [
  "anyhow",
  "dotenv",
  "github-rs",
+ "linkify",
  "log",
  "pico-args",
  "pretty_env_logger",
@@ -748,6 +749,15 @@ name = "libc"
 version = "0.2.82"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "89203f3fba0a3795506acaad8ebce3c80c0af93f994d5a1d7a0b1eeb23271929"
+
+[[package]]
+name = "linkify"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "03951527dd24d2c59f407502e7d88e0948ef06fac23335b556a4c2bc03c22096"
+dependencies = [
+ "memchr",
+]
 
 [[package]]
 name = "lock_api"
