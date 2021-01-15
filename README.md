@@ -3,6 +3,17 @@
 
 ![Rust](https://github.com/wgalyen/kimchi/workflows/Rust/badge.svg)
 
+## Why?
+
+The existing link checkers were not flexible enough for my use-case.
+kimchi can...
+
+* Handle chunked encodings
+* Handle gzip
+* Fake user agents (required for some firewalls)
+* Skip non-links like anchors or relative URLs
+* SOON: Ignore SSL certificate errors
+
 ## How?
 
 Set an environment variable with your token like so `GITHUB_TOKEN=xxxx`.
