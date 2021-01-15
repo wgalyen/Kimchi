@@ -25,6 +25,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "any"
+version = "0.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b2aad95aa1e482901aa0ed78757536ce2ebbfb0ca0f9452ab8aaf78969f758ad"
+
+[[package]]
+name = "anyhow"
+version = "1.0.38"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "afddf7f520a80dbf76e6f50a35bca42a2331ef227a28b3b6dc5c2e2338d114b1"
+
+[[package]]
 name = "async-compression"
 version = "0.3.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -711,6 +723,8 @@ dependencies = [
 name = "kimchi"
 version = "0.1.0"
 dependencies = [
+ "any",
+ "anyhow",
  "dotenv",
  "github-rs",
  "log",
