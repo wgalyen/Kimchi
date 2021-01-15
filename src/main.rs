@@ -1,6 +1,5 @@
 #[macro_use]
 extern crate log;
-extern crate dotenv_codegen;
 
 use github_rs::client::{Executor, Github};
 use github_rs::StatusCode;
@@ -125,7 +124,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 #[cfg(test)]
 mod test {
     use super::*;
-    use std::env;
+    extern crate dotenv;
     use url::Url;
 
     #[test]
@@ -141,6 +140,7 @@ mod test {
 
     #[test]
     fn test_github() {
+        dotenv::dotenv().expect("Failed to read .env file");
         let checker = Checker::new(env::var("GITHUB_TOKEN").unwrap());
         assert_eq!(
             checker.check(&Url::parse("https://github.com/wgalyen/codesweeper").unwrap()),
@@ -150,7 +150,8 @@ mod test {
 
     #[test]
     fn test_github_nonexistent() {
-        let checker = Checker::new(dotenv!("GITHUB_TOKEN"));
+        dotenv::dotenv().expect("Failed to read .env file");
+        let checker = Checker::new(env::var("GITHUB_TOKEN").unwrap());
         assert_eq!(
             checker.check(
                 &Url::parse("https://github.com/wgalyen/codesweeper-doesnt-exist-man").unwrap()
@@ -161,6 +162,7 @@ mod test {
 
     #[test]
     fn test_non_github() {
+        dotenv::dotenv().expect("Failed to read .env file");
         let checker = Checker::new(env::var("GITHUB_TOKEN").unwrap());
         let valid = checker.check(&Url::parse("https://mechanikadesign.com").unwrap());
         assert_eq!(valid, true);
@@ -168,6 +170,7 @@ mod test {
 
     #[test]
     fn test_non_github_nonexistent() {
+        dotenv::dotenv().expect("Failed to read .env file");
         let checker = Checker::new(env::var("GITHUB_TOKEN").unwrap());
         let valid = checker.check(&Url::parse("https://mechanikadesign.com/abcd").unwrap());
         assert_eq!(valid, false);
