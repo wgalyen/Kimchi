@@ -14,10 +14,10 @@ kimchi can...
 - handle gzip compression
 - fake user agents (required for some firewalls)
 - skip non-links like anchors or relative URLs
+- exclude some websites with regular expressions
 - SOON: automatically retry and backoff
 - SOON: optionally ignore SSL certificate errors
 - SOON: optionally handle redirects
-- SOON: exclude some websites with regular expressions
 
 ## How?
 
