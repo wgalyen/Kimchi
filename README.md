@@ -27,6 +27,8 @@ kimchi can...
 - show final summary/statistics
 - optionally use `HEAD` requests instead of `GET`
 - show colored output
+- filter based on status codes (https://github.com/tcort/markdown-link-check/issues/94)
+  (e.g. `--accept 200,204`)
 
 SOON:
 
@@ -37,7 +39,6 @@ SOON:
 - usable as a library (https://github.com/raviqqe/liche/issues/13)
 - exclude private domains (https://github.com/appscodelabs/liche/blob/a5102b0bf90203b467a4f3b4597d22cd83d94f99/url_checker.go)
 - recursion
-- Filter Based on Status Response (https://github.com/tcort/markdown-link-check/issues/94) (`accept`)
 - check mailto links (disable with `no-mailto`) (https://www.npmjs.com/package/isemail)
 
 ## How?
