@@ -19,6 +19,7 @@ kimchi can...
 - optionally ignore SSL certificate errors
 - run with a low memory/CPU footprint
 - check multiple files at once
+- support checking links from any website URL
 
 SOON:
 
@@ -27,7 +28,6 @@ SOON:
 - limit schema
 - support input files using wildcards
 - set timeout for HTTP requests in seconds. Disabled by default.
-- support checking links from any website URL
 - accept custom headers (see https://github.com/rust-lang/crates.io/issues/788)
 - use `HEAD` requests instead of `GET` to avoid network I/O
 - show the progress
