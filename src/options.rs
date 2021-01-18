@@ -42,6 +42,12 @@ pub(crate) struct KimchiOptions {
     #[options(help = "Comma-separated list of accepted status codes for valid links")]
     pub accept: Option<String>,
 
+    #[options(
+        help = "Website timeout from connect to response finished",
+        default = "20"
+    )]
+    pub timeout: String,
+
     #[options(help = "Request method", default = "get")]
     pub method: String,
 }

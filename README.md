@@ -29,6 +29,7 @@ kimchi can...
 - show colored output
 - filter based on status codes (https://github.com/tcort/markdown-link-check/issues/94)
   (e.g. `--accept 200,204`)
+- accept a connect timeout (`--connect-timeout`). Default is 20s. Set to 0 for no timeout.
 
 SOON:
 
