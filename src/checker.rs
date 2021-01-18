@@ -253,7 +253,7 @@ mod test {
             get_checker(false, HeaderMap::new())
                 .check(&Url::parse("https://github.com/wgalyen/codesweeper").unwrap())
                 .await,
-                Status::Ok(_)
+            Status::Ok(_)
         ));
     }
 

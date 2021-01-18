@@ -155,4 +155,3 @@ mod test {
         assert_eq!(actual, expected);
     }
 }
-
