@@ -10,7 +10,7 @@ use reqwest::{
     header::{HeaderMap, HeaderName},
     Url,
 };
-use std::{collections::HashSet, env};
+use std::{collections::HashSet, convert::TryInto, env};
 
 mod checker;
 mod collector;
@@ -73,6 +73,7 @@ async fn run(opts: KimchiOptions) -> Result<i32> {
         opts.insecure,
         opts.scheme,
         headers,
+        opts.method.try_into()?,
         opts.verbose,
     )?;
 
@@ -90,7 +91,7 @@ fn read_header(input: String) -> Result<(String, String)> {
     let elements: Vec<_> = input.split('=').collect();
     if elements.len() != 2 {
         return Err(anyhow!(
-            "Header value should be of the form key=value, got {}",
+            "Header value should be of the form key=value, received {}",
             input
         ));
     }

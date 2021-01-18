@@ -15,7 +15,7 @@ pub(crate) async fn collect_links(inputs: Vec<String>) -> Result<HashSet<Url>> {
                 links.extend(extract_links(&content));
             }
             Err(_) => {
-                // Assume we got a single file or a glob on our hands
+                // Assume we received a single file or a glob on our hands
                 for entry in glob(&input)? {
                     match entry {
                         Ok(path) => {
