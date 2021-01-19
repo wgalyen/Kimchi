@@ -1,5 +1,3 @@
-#![type_length_limit = "7912782"]
-
 #[macro_use]
 extern crate log;
 
@@ -109,7 +107,7 @@ async fn run(opts: KimchiOptions) -> Result<i32> {
     if opts.verbose {
         print_summary(&links, &results);
     }
-    
+
     Ok(results.iter().all(|r| r.is_success()) as i32)
 }
 
