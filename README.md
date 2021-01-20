@@ -47,10 +47,10 @@ This comparison is made on a best-effort basis. Please create a PR to fix outdat
 | Skip private domains | ✔️     | ✖️          | ✖️     | ✖️                  | ✖️         | ✖️          | ✖️                  | ✖️   |
 | [Use as lib]         | ✖️     | ✔️          | ✖️     | ✔️                  | ✔️         | ✖️          | ✔️                  | ✖️   |
 | Quiet mode           | ✔️     | ✖️          | ✖️     | ✖️                  | ✔️         | ✔️          | ✔️                  | ✔️   |
+| Config file          | ✔️     | ✖️          | ✖️     | ✖️                  | ✔️         | ✔️          | ✔️                  | ✖️   |
 
 ## Planned features:
 
-- kimchi.toml
 - report output in HTML, SQL, CSV, XML, JSON, YAML... format
 - report extended statistics: request latency
 - recursion
