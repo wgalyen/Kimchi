@@ -59,13 +59,21 @@ This comparison is made on a best-effort basis. Please create a PR to fix outdat
 
 ## How?
 
-Set an environment variable with your token like so `GITHUB_TOKEN=xxxx`.
+Optional (to avoid being rate limited for GitHub links): set an environment variable with your token
+like so `GITHUB_TOKEN=xxxx`, or use the `--github-token` CLI option. This can also be set in the
+config file.
 
 Run it inside a repository with a `README.md` or specify a file with
 
 ```
 kimchi <yourfile>
 ```
+
+### CLI exit codes
+
+- `0` for success (all links checked successfully or excluded/skipped as configured)
+- `1` for any unexpected runtime failures or config errors
+- `2` for link check failures (if any non-excluded link failed the check)
 
 ## Comparison
 
