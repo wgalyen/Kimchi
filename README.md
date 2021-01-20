@@ -13,7 +13,7 @@ TODO: Add screenshots here
 
 This comparison is made on a best-effort basis. Please create a PR to fix outdated information.
 
-|                      | kimchi  | awesome_bot | muffet   | broken-link-checker | linkinator | linkchecker | markdown-link-check | fink   |
+|                      | kimchi  | [awesome_bot] | [muffet]   | [broken-link-checker] | [linkinator] | [linkchecker] | [markdown-link-check] | [fink]   |
 | -------------------- | ------- | ----------- | -------- | ------------------- | ---------- | ----------- | ------------------- | ------ |
 | Language             | Rust    | Ruby        | Go       | JS                  | TypeScript | Python      | JS                  | PHP    |
 | Async/Parallel       | ![yes]  | ![yes]      | ![yes]   | ![yes]              | ![yes]     | ![yes]      | ![yes]              | ![yes] |
@@ -48,9 +48,20 @@ This comparison is made on a best-effort basis. Please create a PR to fix outdat
 | Quiet mode           | ![yes]  | ![no]       | ![no]    | ![no]               | ![yes]     | ![yes]      | ![yes]              | ![yes] |
 | Config file          | ![yes]  | ![no]       | ![no]    | ![no]               | ![yes]     | ![yes]      | ![yes]              | ![no]  |
 
+[awesome_bot]: https://github.com/dkhamsing/awesome_bot
+[muffet]: https://github.com/raviqqe/muffet
+[broken-link-checker]: https://github.com/stevenvachon/broken-link-checker
+[linkinator]: https://github.com/JustinBeckwith/linkinator
+[linkchecker]: https://github.com/linkchecker/linkchecker
+[markdown-link-check]: https://github.com/tcort/markdown-link-check
+[fink]: https://github.com/dantleech/fink
 [yes]: ./assets/yes.svg
 [no]: ./assets/no.svg
 [maybe]: ./assets/maybe.svg
+[custom headers]: https://github.com/rust-lang/crates.io/issues/788
+[filter status code]: https://github.com/tcort/markdown-link-check/issues/94
+[skip private domains]: https://github.com/appscodelabs/liche/blob/a5102b0bf90203b467a4f3b4597d22cd83d94f99/url_checker.go
+[use as lib]: https://github.com/raviqqe/liche/issues/13
 
 ## Planned features. Please help out!
 
@@ -80,15 +91,7 @@ kimchi <yourfile>
 
 ## Comparison
 
-Collecting other link checkers here to crush them in comparison. :)
+Collecting more link checkers here for comparison:
 
-- https://github.com/dkhamsing/awesome_bot
-- https://github.com/tcort/markdown-link-check
-- https://github.com/raviqqe/liche
-- https://github.com/raviqqe/muffet
-- https://github.com/stevenvachon/broken-link-checker
-- https://github.com/JustinBeckwith/linkinator
-- https://github.com/linkchecker/linkchecker
-- https://github.com/dantleech/fink
 - https://github.com/bartdag/pylinkvalidator
 - https://github.com/victoriadrake/hydra-link-checker
