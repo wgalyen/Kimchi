@@ -134,6 +134,10 @@ pub(crate) struct Config {
     #[structopt(short, long, help = "Base URL to check relative URLs")]
     #[serde(default)]
     pub base_url: Option<String>,
+
+    #[structopt(long, help = "Basic autentication support. Ex 'username:password'")]
+    #[serde(default)]
+    pub basic_auth: Option<String>,
 }
 
 impl Config {
@@ -184,6 +188,7 @@ impl Config {
             timeout: TIMEOUT;
             method: METHOD;
             base_url: None;
+            basic_auth: None;
         }
 
         self
