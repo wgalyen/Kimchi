@@ -252,12 +252,12 @@ mod test {
     #[test]
     fn test_non_markdown_links() {
         let input =
-            "https://mechanikadesign.com and https://wgalyen.show/foo/bar?lol=1 at test@example.com";
+            "https://mechanikadesign.com and https://mechanikadesign.com/foo/bar?lol=1 at test@example.com";
         let links = extract_links(FileType::Plaintext, input, None);
         let expected = HashSet::from_iter(
             [
                 Uri::Website(Url::parse("https://mechanikadesign.com").unwrap()),
-                Uri::Website(Url::parse("https://wgalyen.show/foo/bar?lol=1").unwrap()),
+                Uri::Website(Url::parse("https://mechanikadesign.com/foo/bar?lol=1").unwrap()),
                 Uri::Mail("test@example.com".to_string()),
             ]
             .iter()
