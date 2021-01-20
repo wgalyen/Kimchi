@@ -3,12 +3,11 @@
 ![Build/Tests](https://github.com/wgalyen/Kimchi/workflows/Kimchi%20Tests/badge.svg)
 ![Lints](https://github.com/wgalyen/Kimchi/workflows/Kimchi%20Lints/badge.svg)
 
+A fast, async, resource-friendly link checker written in Rust.
+For GitHub links, it can optionally use a `GITHUB_TOKEN` to avoid getting blocked by the rate
+limiter.
+
 TODO: Add screenshots here
-
-## Why?
-
-The existing link checkers were not flexible enough for my use-case. Kimchi
-runs all requests fully asynchronously and has a low memory/CPU footprint.
 
 ## Features
 
@@ -49,7 +48,7 @@ This comparison is made on a best-effort basis. Please create a PR to fix outdat
 | Quiet mode           | ✔️     | ✖️          | ✖️     | ✖️                  | ✔️         | ✔️          | ✔️                  | ✔️   |
 | Config file          | ✔️     | ✖️          | ✖️     | ✖️                  | ✔️         | ✔️          | ✔️                  | ✖️   |
 
-## Planned features:
+## Planned features. Please help out!
 
 - report output in HTML, SQL, CSV, XML, JSON, YAML... format
 - report extended statistics: request latency
