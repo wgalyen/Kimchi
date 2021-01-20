@@ -79,7 +79,6 @@ async fn run(opts: KimchiOptions) -> Result<i32> {
     } else {
         None
     };
-
     let checker = Checker::try_new(
         env::var("GITHUB_TOKEN")?,
         excludes,
@@ -114,7 +113,7 @@ fn read_header(input: String) -> Result<(String, String)> {
     let elements: Vec<_> = input.split('=').collect();
     if elements.len() != 2 {
         return Err(anyhow!(
-            "Header value should be of the form key=value, received {}",
+            "Header value should be of the form key=value, got {}",
             input
         ));
     }
