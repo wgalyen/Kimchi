@@ -1,6 +1,7 @@
 # Kimchi
 
 ![Build/Tests](https://github.com/wgalyen/Kimchi/workflows/Kimchi%20Tests/badge.svg)
+![Lints](https://github.com/wgalyen/Kimchi/workflows/Kimchi%20Lints/badge.svg)
 
 TODO: Add screenshots here
 
