@@ -36,6 +36,7 @@ kimchi can...
 
 SOON:
 
+- report output in HTML, SQL, CSV, XML, JSON, YAML...
 - automatically retry and backoff
 - check relative (`base-url` to set project root)
 - usable as a library (https://github.com/raviqqe/liche/issues/13)
@@ -43,6 +44,7 @@ SOON:
 - recursion
 - use colored output (https://crates.io/crates/colored)
 - extended statistics: request latency
+- kimchi.toml
 
 ## How?
 
@@ -63,3 +65,9 @@ Collecting other link checkers here to crush them in comparison. :)
 - https://github.com/tcort/markdown-link-check
 - https://github.com/raviqqe/liche
 - https://github.com/raviqqe/muffet
+- https://github.com/stevenvachon/broken-link-checker
+- https://github.com/JustinBeckwith/linkinator
+- https://github.com/linkchecker/linkchecker
+- https://github.com/dantleech/fink
+- https://github.com/bartdag/pylinkvalidator
+- https://github.com/victoriadrake/hydra-link-checker
