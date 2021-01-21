@@ -84,7 +84,7 @@ pub enum Status {
     Timeout,
     /// Got redirected to different resource
     Redirected,
-    /// Resource was excluded from checking 
+    /// Resource was excluded from checking
     Excluded,
     /// Low-level error while loading resource
     Error(String),

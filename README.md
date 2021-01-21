@@ -72,17 +72,17 @@ This comparison is made on a best-effort basis. Please create a PR to fix outdat
 - Skip duplicate URLs
 - Request throttling
 
-## How?
+## Usage
 
-Optional (to avoid being rate limited for GitHub links): set an environment variable with your token
-like so `GITHUB_TOKEN=xxxx`, or use the `--github-token` CLI option. This can also be set in the
-config file.
-
-Run it inside a repository with a `README.md` or specify a file with
+Run it inside a repository with a `README.md`, or specify a file with
 
 ```
 kimchi <yourfile>
 ```
+
+Optional (to avoid getting rate-limited): set an environment variable with your Github token
+like so `GITHUB_TOKEN=xxxx`, or use the `--github-token` CLI option. It can also be set in the
+config file.
 
 ### CLI exit codes
 
@@ -90,9 +90,3 @@ kimchi <yourfile>
 - `1` for any unexpected runtime failures or config errors
 - `2` for link check failures (if any non-excluded link failed the check)
 
-## Comparison
-
-Collecting more link checkers here for comparison:
-
-- https://github.com/bartdag/pylinkvalidator
-- https://github.com/victoriadrake/hydra-link-checker

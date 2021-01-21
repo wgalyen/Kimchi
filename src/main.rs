@@ -118,7 +118,7 @@ async fn run(cfg: Config, inputs: Vec<String>) -> Result<i32> {
     } else {
         None
     };
-    
+
     let (mut send_req, recv_req) = mpsc::channel(max_concurrency);
     let (send_resp, mut recv_resp) = mpsc::channel(max_concurrency);
 
