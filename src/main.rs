@@ -41,7 +41,7 @@ fn main() -> Result<()> {
     pretty_env_logger::init();
     let opts = KimchiOptions::from_args();
 
-    // Load a pontentially existing config file and merge it into the config from the CLI
+    // Load a potentially existing config file and merge it into the config from the CLI
     let cfg = if let Some(c) = Config::load_from_file(&opts.config_file)? {
         opts.config.merge(c)
     } else {

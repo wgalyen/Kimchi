@@ -1,6 +1,6 @@
 [package]
 name = "kimchi"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Warren Galyen <wgalyen@bellhelmets.com>"]
 edition = "2018"
 description = "A spicy link checker"
@@ -40,6 +40,6 @@ features = ["full"]
 version = "0.2"
 
 [dev-dependencies]
-wiremock = "0.4.7"
+wiremock = "0.3"
 assert_cmd = "1.0"
 predicates = "1.0"
