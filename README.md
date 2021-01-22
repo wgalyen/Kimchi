@@ -44,7 +44,7 @@ This comparison is made on a best-effort basis. Please create a PR to fix outdat
 | Progress bar         | ![yes]  | ![yes]      | ![no]    | ![no]               | ![no]      | ![yes]      | ![yes]              | ![yes] |
 | Retry and backoff    | ![yes]  | ![no]       | ![no]    | ![no]               | ![yes]     | ![no]       | ![yes]              | ![no]  |
 | Skip private domains | ![yes]  | ![no]       | ![no]    | ![no]               | ![no]      | ![no]       | ![no]               | ![no]  |
-| [Use as lib]         | ![no]   | ![yes]      | ![no]    | ![yes]              | ![yes]     | ![no]       | ![yes]              | ![no]  |
+| [Use as library]     | ![yes]  | ![yes]      | ![no]    | ![yes]              | ![yes]     | ![no]       | ![yes]              | ![no]  |
 | Quiet mode           | ![yes]  | ![no]       | ![no]    | ![no]               | ![yes]     | ![yes]      | ![yes]              | ![yes] |
 | Config file          | ![yes]  | ![no]       | ![no]    | ![no]               | ![yes]     | ![yes]      | ![yes]              | ![no]  |
 
@@ -61,7 +61,7 @@ This comparison is made on a best-effort basis. Please create a PR to fix outdat
 [custom headers]: https://github.com/rust-lang/crates.io/issues/788
 [filter status code]: https://github.com/tcort/markdown-link-check/issues/94
 [skip private domains]: https://github.com/appscodelabs/liche/blob/a5102b0bf90203b467a4f3b4597d22cd83d94f99/url_checker.go
-[use as lib]: https://github.com/raviqqe/liche/issues/13
+[use as library]: https://github.com/raviqqe/liche/issues/13
 
 ## Planned features. Please help out!
 
