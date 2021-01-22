@@ -1,4 +1,4 @@
-use crate::collector::Input;
+use kimchi::collector::Input;
 
 use anyhow::{Error, Result};
 use lazy_static::lazy_static;
