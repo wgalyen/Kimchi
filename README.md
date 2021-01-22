@@ -74,7 +74,10 @@ This comparison is made on a best-effort basis. Please create a PR to fix outdat
 
 ### Installation
 
-Download the zip file directly from releases section for your platform (Windows, Linux, MacOS) (https://github.com/wgalyen/Kimchi/releases)
+### Using pre-built binaries
+
+I provide binaries for Linux, macOS, and Windows for every release. \
+You can download them from the [releases page](https://github.com/wgalyen/kimchi/releases).
 
 ## Commandline usage
 
@@ -208,5 +211,5 @@ let client = ClientBuilder::default()
 
 ## Troubleshooting and workarounds
 
-We collect a list of common workarounds for various websites in our [troubleshooting guide](./TROUBLESHOOTING.md).
+I collect a list of common workarounds for various websites in the [troubleshooting guide](./TROUBLESHOOTING.md).
 
