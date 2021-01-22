@@ -74,7 +74,7 @@ This comparison is made on a best-effort basis. Please create a PR to fix outdat
 
 ### Installation
 
-### Using pre-built binaries
+#### Using pre-built binaries
 
 I provide binaries for Linux, macOS, and Windows for every release. \
 You can download them from the [releases page](https://github.com/wgalyen/kimchi/releases).
