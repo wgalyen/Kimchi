@@ -1,6 +1,6 @@
 [package]
 name = "kimchi"
-version = "0.4.1"
+version = "0.4.2"
 authors = ["Warren Galyen <wgalyen@bellhelmets.com>"]
 edition = "2018"
 description = "A spicy link checker"
