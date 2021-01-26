@@ -186,10 +186,9 @@ You can use kimchi as a library for your own projects.
 Simply add it as a dependency and build your client:
 
 ```rust
-use kimchi::ClientBuilder;
 use http::StatusCode
 
-let client = ClientBuilder::default().build()?;
+let client = kimchi::ClientBuilder::default().build()?;
 let url = Url::parse("https://github.com/wgalyen/kimchi")?;
 let response = client.check(Website(url)).await?;
 assert!(matches!(response.status, Status::Ok(_)));
@@ -198,7 +197,7 @@ assert!(matches!(response.status, Status::Ok(_)));
 The client is very customizable, e.g.
 
 ```rust
-let client = ClientBuilder::default()
+let client = kimchi::ClientBuilder::default()
     .includes(includes)
     .excludes(excludes)
     .max_redirects(cfg.max_redirects)
