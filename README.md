@@ -17,8 +17,8 @@ This comparison is made on a best-effort basis. Please create a PR to fix outdat
 | -------------------- | ------- | ----------- | -------- | ------------------- | ---------- | ----------- | ------------------- | ------ |
 | Language             | Rust    | Ruby        | Go       | JS                  | TypeScript | Python      | JS                  | PHP    |
 | Async/Parallel       | ![yes]  | ![yes]      | ![yes]   | ![yes]              | ![yes]     | ![yes]      | ![yes]              | ![yes] |
+| JSON output | ![yes] | ![no] | ![yes] | ![yes] | ![yes] | ![maybe]<sup>1</sup> | ![yes] | ![yes] |
 | Static binary        | ![yes]  | ![no]       | ![yes]   | ![no]               | ![no]      | ️![no]       | ![no]               | ![no]  |
-| JSON output | ![yes] | ![no]   | ![yes]      | ![yes]   | ![yes]              | ![maybe]<sup>1</sup> | ![yes] | ![yes] |
 | Markdown files       | ![yes]  | ![yes]      | ![no]    | ![no]               | ![no]      | ![yes]      | ️![yes]              | ![no]  |
 | HTML files           | ![yes]  | ![no]       | ![no]    | ![yes]              | ![yes]     | ![yes]      | ![no]               | ![no]  |
 | Text files           | ![yes]  | ![no]       | ![no]    | ![no]               | ![no]      | ![no]       | ![no]               | ![no]  |
@@ -153,7 +153,7 @@ OPTIONS:
         --basic-auth <basic-auth>              Basic authentication support. E.g. `username:password`
     -c, --config <config-file>                 Configuration file to use [default: ./kimchi.toml]
         --exclude <exclude>...                 Exclude URLs from checking (supports regex)
-        -f, --format <format>                      Output file format of status report [default: string]
+    -f, --format <format>                      Output file format of status report [default: string]
         --github-token <github-token>          GitHub API token to use when checking github.com links, to avoid rate
                                                limiting [env: GITHUB_TOKEN=]
     -h, --headers <headers>...                 Custom request headers
