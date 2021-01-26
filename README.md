@@ -18,6 +18,7 @@ This comparison is made on a best-effort basis. Please create a PR to fix outdat
 | Language             | Rust    | Ruby        | Go       | JS                  | TypeScript | Python      | JS                  | PHP    |
 | Async/Parallel       | ![yes]  | ![yes]      | ![yes]   | ![yes]              | ![yes]     | ![yes]      | ![yes]              | ![yes] |
 | Static binary        | ![yes]  | ![no]       | ![yes]   | ![no]               | ![no]      | ️![no]       | ![no]               | ![no]  |
+| JSON output | ![yes] | ![no]   | ![yes]      | ![yes]   | ![yes]              | ![maybe]<sup>1</sup> | ![yes] | ![yes] |
 | Markdown files       | ![yes]  | ![yes]      | ![no]    | ![no]               | ![no]      | ![yes]      | ️![yes]              | ![no]  |
 | HTML files           | ![yes]  | ![no]       | ![no]    | ![yes]              | ![yes]     | ![yes]      | ![no]               | ![no]  |
 | Text files           | ![yes]  | ![no]       | ![no]    | ![no]               | ![no]      | ![no]       | ![no]               | ![no]  |
@@ -62,6 +63,8 @@ This comparison is made on a best-effort basis. Please create a PR to fix outdat
 [filter status code]: https://github.com/tcort/markdown-link-check/issues/94
 [skip private domains]: https://github.com/appscodelabs/liche/blob/a5102b0bf90203b467a4f3b4597d22cd83d94f99/url_checker.go
 [use as library]: https://github.com/raviqqe/liche/issues/13
+
+<sup>1</sup> Other machine-readable formats like CSV are supported.
 
 ## Planned features. Please help out!
 
