@@ -38,12 +38,11 @@ fn main() -> Result<()> {
     }
     let cfg = &opts.config;
 
-    let mut runtime = match cfg.threads {
+    let runtime = match cfg.threads {
         Some(threads) => {
             // We define our own runtime instead of the `tokio::main` attribute since we want to make the number of threads configurable
-            tokio::runtime::Builder::new()
-                .threaded_scheduler()
-                .core_threads(threads)
+            tokio::runtime::Builder::new_multi_thread()
+                .worker_threads(threads)
                 .enable_all()
                 .build()?
         }
