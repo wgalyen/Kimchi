@@ -124,7 +124,7 @@ async fn run(cfg: &Config, inputs: Vec<Input>) -> Result<i32> {
         None
     };
 
-    let (mut send_req, recv_req) = mpsc::channel(max_concurrency);
+    let (send_req, recv_req) = mpsc::channel(max_concurrency);
     let (send_resp, mut recv_resp) = mpsc::channel(max_concurrency);
 
     let mut stats = ResponseStats::new();

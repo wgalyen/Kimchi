@@ -7,7 +7,7 @@ use regex::{Regex, RegexSet};
 use reqwest::header;
 use std::net::IpAddr;
 use std::{collections::HashSet, time::Duration};
-use tokio::time::delay_for;
+use tokio::time::sleep;
 use url::Url;
 
 use crate::excludes::Excludes;
@@ -40,6 +40,7 @@ pub struct ClientBuilderInternal {
     /// This allows for more requests before
     /// getting rate-limited.
     github_token: Option<String>,
+    /// Check links matching this set of regular expressions
     includes: Option<RegexSet>,
     /// Exclude links matching this set of regular expressions
     excludes: Option<RegexSet>,
@@ -196,7 +197,7 @@ impl Client {
                 false => {
                     if retries > 0 {
                         retries -= 1;
-                        delay_for(Duration::from_secs(wait)).await;
+                        sleep(Duration::from_secs(wait)).await;
                         wait *= 2;
                     } else {
                         break res;

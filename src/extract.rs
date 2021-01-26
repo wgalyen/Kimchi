@@ -43,7 +43,7 @@ fn find_links(input: &str) -> Vec<linkify::Link> {
     finder.links(input).collect()
 }
 
-// Extract unparsed URL strings from a markdown string
+/// Extract unparsed URL strings from a markdown string.
 fn extract_links_from_markdown(input: &str) -> Vec<String> {
     let parser = Parser::new(input);
     parser
@@ -59,7 +59,7 @@ fn extract_links_from_markdown(input: &str) -> Vec<String> {
         .collect()
 }
 
-// Extract unparsed URL strings from a HTML string
+/// Extract unparsed URL strings from a HTML string.
 fn extract_links_from_html(input: &str) -> Vec<String> {
     let tendril = StrTendril::from(input);
     let rc_dom = parse_document(RcDom::default(), Default::default()).one(tendril);
@@ -133,7 +133,7 @@ fn elem_attr_is_link(attr_name: &str, elem_name: &str) -> bool {
     )
 }
 
-// Extract unparsed URL strings from a plaintext
+/// Extract unparsed URL strings from a plaintext.
 fn extract_links_from_plaintext(input: &str) -> Vec<String> {
     find_links(input)
         .iter()

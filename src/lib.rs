@@ -1,4 +1,4 @@
-// #[deny(missing_docs)]
+#[deny(missing_docs)]
 
 /**
 * `kimchi` is a library for checking links.
