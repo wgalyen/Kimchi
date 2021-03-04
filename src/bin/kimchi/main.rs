@@ -57,7 +57,7 @@ fn run_main() -> Result<i32> {
         }
         None => tokio::runtime::Runtime::new()?,
     };
-    
+
     runtime.block_on(run(cfg, opts.inputs()))
 }
 
