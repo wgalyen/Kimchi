@@ -182,6 +182,11 @@ pub struct Config {
     #[serde(default)]
     pub exclude_loopback: bool,
 
+    /// Exlucde all mail addresses from checking
+    #[structopt(long)]
+    #[serde(default)]
+    pub exclude_mail: bool,
+
     /// Custom request headers
     #[structopt(short, long)]
     #[serde(default)]
@@ -280,6 +285,7 @@ impl Config {
             exclude_private: false;
             exclude_link_local: false;
             exclude_loopback: false;
+            exclude_mail: false;
             headers: Vec::<String>::new();
             accept: None;
             timeout: TIMEOUT;
