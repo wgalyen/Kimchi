@@ -8,7 +8,7 @@
 * "Hello world" example:
 * ```
 *
-* use kimchi::{ClientBuilder, Status};
+* use kimchi::{Request, Input, ClientBuilder, Status};
 * use kimchi::Uri::Website;
 * use url::Url;
 * use std::error::Error;
@@ -17,7 +17,7 @@
 * async fn main() -> Result<(), Box<dyn Error>> {
 *   let client = ClientBuilder::default().build()?;
 *   let url = Url::parse("https://github.com/wgalyen/kimchi")?;
-*   let response = client.check(Website(url)).await;
+*   let response = client.check(Request::new(Website(url), Input::Stdin)).await;
 *   assert!(matches!(response.status, Status::Ok(_)));
 *   Ok(())
 * }
@@ -35,6 +35,7 @@ pub mod test_utils;
 
 pub use client::ClientBuilder;
 pub use client_pool::ClientPool;
+pub use collector::Input;
 pub use excludes::Excludes;
 pub use types::*;
 pub use uri::Uri;
