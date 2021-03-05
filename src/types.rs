@@ -1,5 +1,6 @@
 use crate::{collector::Input, uri::Uri};
 use anyhow::anyhow;
+use serde::{Serialize, Serializer};
 use std::{collections::HashSet, convert::TryFrom, fmt::Display};
 
 #[derive(Debug, PartialEq, Eq, Hash, Clone)]
@@ -37,10 +38,12 @@ impl TryFrom<String> for RequestMethod {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq, Hash, Serialize)]
 pub struct Response {
+    #[serde(flatten)]
     pub uri: Uri,
     pub status: Status,
+    #[serde(skip)]
     pub source: Input,
 }
 
@@ -54,8 +57,22 @@ impl Response {
     }
 }
 
+impl Display for Response {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let metadata = match &self.status {
+            Status::Ok(code) | Status::Redirected(code) | Status::Failed(code) => {
+                format!(" [{}]", code)
+            }
+            Status::Timeout(code) if code.is_some() => format!(" [{}]", code.unwrap()),
+            Status::Error(e) => format!(" ({})", e),
+            _ => "".to_string(),
+        };
+        write!(f, "{} {}{}", self.status.icon(), self.uri, metadata)
+    }
+}
+
 /// Response status of the request
-#[derive(Debug)]
+#[derive(Debug, Hash, PartialEq, Eq)]
 pub enum Status {
     /// Request was successful
     Ok(http::StatusCode),
@@ -69,6 +86,30 @@ pub enum Status {
     Excluded,
     /// Low-level error while loading resource
     Error(String),
+}
+
+impl Display for Status {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let out = match self {
+            Status::Ok(c) => format!("OK ({})", c),
+            Status::Redirected(c) => format!("Redirect ({})", c),
+            Status::Excluded => "Excluded".to_string(),
+            Status::Failed(c) => format!("Failed ({})", c),
+            Status::Error(e) => format!("Runtime error ({})", e),
+            Status::Timeout(Some(c)) => format!("Timeout ({})", c),
+            Status::Timeout(None) => "Timeout".to_string(),
+        };
+        write!(f, "{}", out)
+    }
+}
+
+impl Serialize for Status {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        serializer.collect_str(self)
+    }
 }
 
 impl Status {
@@ -86,6 +127,21 @@ impl Status {
 
     pub fn is_success(&self) -> bool {
         matches!(self, Status::Ok(_))
+    }
+
+    pub fn is_excluded(&self) -> bool {
+        matches!(self, Status::Excluded)
+    }
+
+    pub fn icon(&self) -> &str {
+        match self {
+            Status::Ok(_) => "✅",
+            Status::Redirected(_) => "🔀️",
+            Status::Excluded => "👻",
+            Status::Failed(_) => "🚫",
+            Status::Error(_) => "⚡",
+            Status::Timeout(_) => "⌛",
+        }
     }
 }
 
