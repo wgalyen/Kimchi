@@ -245,7 +245,7 @@ mod test {
             links,
             [
                 website("https://github.com/wgalyen/kimchi/"),
-                website("https://github.com/wgalyen/blob/master/README.md"),               
+                website("https://github.com/wgalyen/blob/master/README.md"),
             ]
             .iter()
             .cloned()
