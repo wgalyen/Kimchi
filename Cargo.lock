@@ -1335,6 +1335,7 @@ dependencies = [
  "console",
  "deadpool",
  "derive_builder",
+ "doc-comment",
  "futures",
  "glob",
  "headers",

@@ -87,13 +87,13 @@ You can download them from the [releases page](https://github.com/wgalyen/kimchi
 
 Run it inside a repository with a `README.md`:
 
-```
+```sh
 kimchi
 ```
 
 You can also specify various types of inputs:
 
-```
+```sh
 # check links on a website:
 kimchi https://mechanikadesign.com/
 
@@ -112,7 +112,7 @@ kimchi "~/projects/big_project/**/README.*"
 
 # ignore case when globbing, displaying progress and check result for each link:
 kimchi --glob-ignore-case --progress --verbose "~/projects/**/[r]eadme.*"
-```
+```sh
 
 ### GitHub token
 
@@ -215,7 +215,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
 The client builder is very customizable:
 
-```rust
+```rust,ignore
 let client = kimchi::ClientBuilder::default()
     .includes(includes)
     .excludes(excludes)
