@@ -185,18 +185,35 @@ ARGS:
 ## Library usage
 
 You can use kimchi as a library for your own projects.
-Simply add it as a dependency and build your client:
+Here is a "hello world" example:
 
 ```rust
-use http::StatusCode
+use std::error::Error;
 
-let client = kimchi::ClientBuilder::default().build()?;
-let url = Url::parse("https://github.com/wgalyen/kimchi")?;
-let response = client.check(Website(url)).await?;
-assert!(matches!(response.status, Status::Ok(_)));
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn Error>> {
+  let response = kimchi::check("https://github.com/wgalyen/kimchi").await?;
+  println!("{}", response);
+  Ok(())
+}
 ```
 
-The client is very customizable, e.g.
+This is equivalent to the following snippet, in which we build our own client:
+
+```rust
+use kimchi::{ClientBuilder, Status};
+use std::error::Error;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn Error>> {
+  let client = ClientBuilder::default().build()?;
+  let response = client.check("https://github.com/wgalyen/kimchi").await?;
+  assert!(matches!(response.status, Status::Ok(_)));
+  Ok(())
+}
+```
+
+The client builder is very customizable:
 
 ```rust
 let client = kimchi::ClientBuilder::default()
