@@ -1,0 +1,17 @@
+{
+  "total": 11,
+  "successful": 10,
+  "failures": 1,
+  "timeouts": 0,
+  "redirects": 0,
+  "excludes": 0,
+  "errors": 0,
+  "fail_map": {
+    "fixtures\\TEST.md": [
+      {
+        "Website": "https://www.peerlyst.com/posts/a-list-of-static-analysis-tools-for-c-c-peerlyst",
+        "status": "Failed (503 Service Unavailable)"
+      }
+    ]
+  }
+}

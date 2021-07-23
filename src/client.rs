@@ -5,8 +5,8 @@ use headers::{HeaderMap, HeaderValue};
 use hubcaps::{Credentials, Github};
 use regex::{Regex, RegexSet};
 use reqwest::header;
+use std::convert::TryInto;
 use std::{collections::HashSet, time::Duration};
-use std::{convert::TryInto, net::IpAddr};
 use tokio::time::sleep;
 use url::Url;
 
@@ -15,7 +15,6 @@ use crate::uri::Uri;
 use crate::{excludes::Excludes, Request};
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
-
 const DEFAULT_MAX_REDIRECTS: usize = 5;
 
 #[derive(Debug, Clone)]
@@ -165,8 +164,8 @@ impl Client {
         let status = match request.uri {
             Uri::Website(ref url) => self.check_website(&url).await,
             Uri::Mail(ref address) => {
-                 // TODO: We should not be using a HTTP status code for mail
-                 match self.valid_mail(&address).await {
+                // TODO: We should not be using a HTTP status code for mail
+                match self.valid_mail(&address).await {
                     true => Status::Ok(http::StatusCode::OK),
                     false => Status::Error(format!("Invalid mail address: {}", address)),
                 }
@@ -254,63 +253,29 @@ impl Client {
         }
     }
 
-    fn in_regex_excludes(&self, input: &str) -> bool {
-        if let Some(excludes) = &self.excludes.regex {
-            if excludes.is_match(input) {
-                return true;
-            }
-        }
-        false
-    }
-
-    fn in_ip_excludes(&self, uri: &Uri) -> bool {
-        if let Some(ipaddr) = uri.host_ip() {
-            if self.excludes.loopback_ips && ipaddr.is_loopback() {
-                return true;
-            }
-
-            // Note: in a pathological case, an IPv6 address can be IPv4-mapped
-            //       (IPv4 address embedded in a IPv6).  We purposefully
-            //       don't deal with it here, and assume if an address is IPv6,
-            //       we shouldn't attempt to map it to IPv4.
-            //       See: https://tools.ietf.org/html/rfc4291#section-2.5.5.2
-            if let IpAddr::V4(v4addr) = ipaddr {
-                if self.excludes.private_ips && v4addr.is_private() {
-                    return true;
-                }
-                if self.excludes.link_local_ips && v4addr.is_link_local() {
-                    return true;
-                }
-            }
-        }
-
-        false
-    }
-
-    pub fn is_mail_excluded(&self) -> bool {
-        self.excludes.mail
-    }
-
     pub fn excluded(&self, request: &Request) -> bool {
+        if matches!(request.uri, Uri::Mail(_)) && self.excludes.is_mail_excluded() {
+            return true;
+        }
+        if self.excludes.ip(&request.uri) {
+            return true;
+        }
         if let Some(includes) = &self.includes {
+            if includes.is_empty() {
+                return false;
+            }
             if includes.is_match(request.uri.as_str()) {
                 // Includes take precedence over excludes
                 return false;
             } else {
                 // In case we have includes and no excludes,
                 // skip everything that was not included
-                if self.excludes.regex.is_none() {
+                if self.excludes.is_empty() {
                     return true;
                 }
             }
         }
-        if self.in_regex_excludes(request.uri.as_str()) {
-            return true;
-        }
-        if matches!(request.uri, Uri::Mail(_)) {
-            return self.is_mail_excluded();
-        }
-        if self.in_ip_excludes(&request.uri) {
+        if self.excludes.regex(request.uri.as_str()) {
             return true;
         }
         if self.scheme.is_none() {
@@ -414,9 +379,9 @@ mod test {
             ClientBuilder::default()
                 .build()
                 .unwrap()
-                .extract_github("https://github.com/wgalyen/kimchi")
+                .extract_github("https://github.com/mozilla/Spoke")
                 .unwrap(),
-            ("wgalyen".into(), "kimchi".into())
+            ("mozilla".into(), "Spoke".into())
         );
     }
     #[tokio::test]
@@ -425,7 +390,7 @@ mod test {
             ClientBuilder::default()
                 .build()
                 .unwrap()
-                .check("https://github.com/wgalyen/kimchi")
+                .check(website_url("https://github.com/mozilla/Spoke"))
                 .await
                 .unwrap()
                 .status,
@@ -438,7 +403,7 @@ mod test {
         let res = ClientBuilder::default()
             .build()
             .unwrap()
-            .check(website_url("https://github.com/wgalyen/not-kimchi"))
+            .check("https://github.com/wgalyen/not-kimchi")
             .await
             .unwrap()
             .status;
@@ -490,7 +455,7 @@ mod test {
         let res = ClientBuilder::default()
             .build()
             .unwrap()
-            .check(website_url("https://crates.io/crates/wgalyen"))
+            .check(website_url("https://crates.io/crates/wiremock"))
             .await
             .unwrap();
         assert!(matches!(res.status, Status::Failed(StatusCode::NOT_FOUND)));
@@ -504,7 +469,7 @@ mod test {
             .custom_headers(custom)
             .build()
             .unwrap()
-            .check(website_url("https://crates.io/crates/wgalyen"))
+            .check(website_url("https://crates.io/crates/wiremock"))
             .await
             .unwrap();
         assert!(matches!(res.status, Status::Ok(_)));
@@ -545,6 +510,49 @@ mod test {
             client.excluded(&website_url("https://foo.github.com")),
             false
         );
+        assert_eq!(
+            client.excluded(&website_url("https://bar.github.com")),
+            true
+        );
+    }
+
+    #[tokio::test]
+    async fn test_includes_and_excludes_empty() {
+        // This is the pre-configured, empty set of excludes for a client
+        // In this case, only the requests matching the include set will be checked
+        let exclude = Some(RegexSet::empty());
+        let includes = RegexSet::empty();
+
+        let client = ClientBuilder::default()
+            .includes(includes)
+            .excludes(exclude)
+            .build()
+            .unwrap();
+
+        assert_eq!(
+            client.excluded(&website_url("https://foo.github.com")),
+            false
+        );
+    }
+
+    #[tokio::test]
+    async fn test_include_with_empty_exclude() {
+        // This is the pre-configured, empty set of excludes for a client
+        // In this case, only the requests matching the include set will be checked
+        let exclude = Some(RegexSet::empty());
+        let includes = RegexSet::new(&[r"foo.github.com"]).unwrap();
+
+        let client = ClientBuilder::default()
+            .includes(includes)
+            .excludes(exclude)
+            .build()
+            .unwrap();
+
+        assert_eq!(
+            client.excluded(&website_url("https://foo.github.com")),
+            false
+        );
+        assert_eq!(client.excluded(&website_url("https://github.com")), true);
         assert_eq!(
             client.excluded(&website_url("https://bar.github.com")),
             true
